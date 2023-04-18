@@ -1,0 +1,3 @@
+[submodule "content"]
+	path = content
+	url = https://github.com/miccou/ramaworks-updates-log.git

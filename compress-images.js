@@ -18,7 +18,7 @@ let index = [];
 
 // Loop through each file and compress it
 for (const file of files) {
-  const filename = path.basename(file).split("-")[0].replace('.', '-'); //gets just the date component
+  const filename = path.basename(file).split("-")[0].replaceAll('.', '-'); //gets just the date component
   const ext = path.extname(file);
   const outputFilePath = path.join(outputDir, `${filename}.jpeg`);
   index.push(outputFilePath);

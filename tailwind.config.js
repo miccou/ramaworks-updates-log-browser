@@ -17,9 +17,9 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      black: colors.stone,
-      white: colors.amber,
-      gray: colors.emerald
+      stone: colors.stone,
+      amber: colors.amber,
+      emerald: colors.emerald
     },
   },
   plugins: [],

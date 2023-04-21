@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node compress-images.js",
+    "build": "next build && git submodule update && node compress-images.js",
     "start": "next start",
     "lint": "next lint"
   },

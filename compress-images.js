@@ -18,6 +18,7 @@ let index = [];
 
 // Loop through each file and compress it
 for (const file of files) {
+  console.log(`Processing: ${file} - ${Object.values(files).indexOf(file) + 1}/${files.length}`);
   const filename = path.basename(file).split("-")[0].replaceAll('.', '-'); //gets just the date component
   const ext = path.extname(file);
   const outputFilePath = path.join(outputDir, `${filename}.jpeg`);
@@ -48,5 +49,7 @@ for (const file of files) {
   }
 }
 
+console.log('Writing index');
 const indexJson = JSON.stringify(index);
 fs.writeFileSync(path.join(outputDir, 'index.json'), indexJson);
+console.log(`Index written with ${index.length} entries`);

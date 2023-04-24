@@ -53,3 +53,5 @@ console.log('Writing index');
 const indexJson = JSON.stringify(index);
 fs.writeFileSync(path.join(outputDir, 'index.json'), indexJson);
 console.log(`Index written with ${index.length} entries`);
+
+process.exit()

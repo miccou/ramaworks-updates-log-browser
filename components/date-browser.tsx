@@ -1,7 +1,6 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
-import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
+import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -41,6 +40,15 @@ export default function DateBrowser() {
     );
   };
 
+  const IsSelected = (d: string[]): boolean => {
+    var fromRouter = (router.query["d"] as string)?.replaceAll('-', '');
+    console.log(fromRouter);
+    console.log(d.join(''));
+    console.log(fromRouter == d.join(''));
+
+    return fromRouter == d.join('');
+  }
+
   const { data, error } = useSWR<string>("/api/get-index", fetcher);
 
   var dateArray: string[] = data ? JSON.parse(data) : [];
@@ -58,18 +66,23 @@ export default function DateBrowser() {
               onClick={(e) => ClickHandler(d, e)}
               className="flex flex-col border-solid m-2 p-0 items-center border border-stone-200 rounded-lg cursor-pointer shadow-md"
             >
-              <div className="flex flex-row gap-2 p-1 bg-emerald-100 rounded-t-md">
+              <div className={`flex flex-row gap-2 p-1 bg-emerald-100 rounded-t-md ${IsSelected(d) ? "bg-emerald-200" : ""
+                }`}>
                 <div>{d[2]}</div>
                 <div>{Months[Number(d[1])]} </div>
               </div>
-              <div className="bg-emerald-600 text-stone-50 w-full text-center rounded-b-md font-bold">
+              <div className={`bg-emerald-600 text-stone-50 w-full text-center rounded-b-md font-bold 
+              ${IsSelected(d) ? "bg-emerald-800" : ""
+                }`}>
                 {d[0]}
               </div>
+
+
             </div>
           );
         })}
+      {!router.query["d"] && <ScrollToEnd />}
 
-      <ScrollToEnd />
     </div>
   );
 }
